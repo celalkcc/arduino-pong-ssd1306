@@ -1,13 +1,15 @@
+/*
+MIT License
+Copyright (c) 2026 Celal
+*/
+
 #include <Arduino.h>
-
-
 
 //SSD1306 Libraries
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 #include <SPI.h>
 #include <Wire.h>
-
 
 // Initializing the Display
 #define SCREEN_WIDTH 128 
@@ -19,25 +21,37 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 // defining the Playing field
 const int UPPER_BORDER = 0;
-const int LOWER_BORDER = (SCREEN_HEIGHT - 1); // Using Screenheight and width, to make it portable to other displays
-const int LEFT_BORDER = 0;
+const int LOWER_BORDER = (SCREEN_HEIGHT - 1);   // Using Screenheight and width -1, 
+const int LEFT_BORDER = 0;                      // to make it portable to other displays
 const int RIGHT_BORDER = (SCREEN_WIDTH - 1);
 
 // defining Poti Pins
 const int potiLeftPlayer = A0;
 const int potiRightPlayer = A1;
-const int button = 4;
+const int multiButton = 4;
 
+// defining game Variables
+const int startImageFlipTime = 2000; // intervall to flip between images in start screen
+const int timeToGetReady = 2000; // time players have when game starts and after points were made
+
+const int winnerScreenTime = 4000;
+
+int paddleBorderDistance = 10;
+int paddleLength = 9;
+
+// states for the startscreen and all the in-game related states.
 enum machineState {
   START_SCREEN,
-  START_TIMER,
+  GET_READY_TO_PLAY,
   IN_GAME,
   LEFT_WINS,
   RIGHT_WINS,
 };
 
-machineState currentState = START_SCREEN; 
-static unsigned long timerMillis = 0;
+machineState currentState = START_SCREEN; // initializing state machine
+
+static unsigned long getReadyTimerMillis = 0;
+
 // header Files
 #include "playerManagement.h"
 #include "ballManagement.h"
@@ -49,10 +63,10 @@ static unsigned long timerMillis = 0;
 /****************************************/
 
 void setup() {
-  Serial.begin(9600); // Initializing Logging
-  Serial.println("Firmware Version 0.99\n");
+  Serial.begin(9600); 
+  Serial.println("Firmware Version 1.0\n");
 
-  pinMode(button, INPUT_PULLUP);
+  pinMode(multiButton, INPUT_PULLUP);
   
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
     Serial.println(F("SSD1306 allocation failed"));
@@ -68,54 +82,53 @@ void loop(){
   switch(currentState) {
 
     case START_SCREEN:
-      static unsigned long menuMillis = 0;
-      static bool picSelector = 0;
-      if (millis() - menuMillis > 2000) {
+      static unsigned long bitmapSwitchMillis = 0;  // time cache for image flipping
+      static bool picSelector = 0;                  // determines the pic shown (in start.h)
+      if (millis() - bitmapSwitchMillis > startImageFlipTime) {
         picSelector = !picSelector;
-        menuMillis = millis();
+        bitmapSwitchMillis = millis();
       }
-      printStartScreen(picSelector);
-
-      if(!digitalRead(button)) {
-        timerMillis = millis();
+      printStartScreen(picSelector); // prints a bitmap (see start.h)
+      
+      if(!digitalRead(multiButton)) {   
+        getReadyTimerMillis = millis();
         ballInCenter();
-        currentState = START_TIMER;
+        currentState = GET_READY_TO_PLAY;
       }
       break;
 
-    case START_TIMER:
-
-      updatePlayers();
-      renderScreen();
-      if(millis() -timerMillis > 2000) {
+    case GET_READY_TO_PLAY:
+      updatePlayers();  // calculates player positions (see playerManagement.h)
+      renderScreen();   // renders everything to screen (see rendering.h)
+      if(millis() - getReadyTimerMillis > timeToGetReady) {
         currentState = IN_GAME;
       }
       break;
 
     case IN_GAME:
-      updatePlayers();
-      borderCheck();
-      directionFlip();
-      renderScreen();
-      checkPoints();
+      updatePlayers(); // playerPosition (playerManagement.h)
+      borderCheck(); // checks if the ball hits something, flips direction (see ballManagement.h)
+      ballPosition(); // calculates ball position (ballManagement.h)
+      renderScreen(); // renders frames (rendering.h)
+      checkPoints(); // detects if a player made a point (pointsManagement.h)
       break;
 
     case LEFT_WINS:
-      display.clearDisplay();
+      display.clearDisplay(); // prints a bitmap announcing the winner (pointsManagement.h)
       display.drawBitmap(0, 0, leftWins, 128, 32, WHITE);
       display.display();
-      delay(4000);
-      currentState = START_SCREEN;
+      delay(winnerScreenTime);
+      currentState = START_SCREEN; // return to startscreen
       break;
 
     case RIGHT_WINS:
-      display.clearDisplay();
+      display.clearDisplay(); // prints bitmap announcing winnser 
       display.drawBitmap(0, 0, rightWins, 128, 32, WHITE);
       display.display();
-      delay(4000);
+      delay(winnerScreenTime);
       currentState = START_SCREEN;
       break;
-      currentState = START_SCREEN;
+      currentState = START_SCREEN; // return to startScreen
   }
 }
 

@@ -5,7 +5,7 @@ bool yDirection = 0; // Display y Axis: 0 = down, 1 = up
 int yPosition = LOWER_BORDER/2; //initializing ball position in the middle of playing field
 int xPosition = RIGHT_BORDER/2;
 
-void ballInCenter() {
+void ballInCenter() { // initial ball position
   yPosition = LOWER_BORDER/2; 
   xPosition = RIGHT_BORDER/2;
 }
@@ -19,13 +19,13 @@ void borderCheck(){
     yDirection = !yDirection;
   }
   //direction switches for paddles:
-  if  (xPosition == borderDistance+1 && 
+  if  (xPosition == paddleBorderDistance+1 && 
       (yPosition >= yPositionLeftPlayer && 
       yPosition <= yPositionLeftPlayer + paddleLength)) 
   {
       xDirection = !xDirection;
   }
-  if  (xPosition == RIGHT_BORDER-borderDistance-1 && 
+  if  (xPosition == RIGHT_BORDER-paddleBorderDistance-1 && 
       (yPosition >= yPositionRightPlayer && 
       yPosition <= yPositionRightPlayer + paddleLength)) 
   {
@@ -33,7 +33,7 @@ void borderCheck(){
   }
 }
 
-void directionFlip(){
+void ballPosition(){
   if(yDirection) {
     yPosition--;
   } else {

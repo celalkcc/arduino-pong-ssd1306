@@ -77,15 +77,15 @@ void checkPoints() {
   if (xPosition < LEFT_BORDER) {
     ballInCenter();
     rPlayerPoints++;
-    timerMillis = millis();
-    currentState = START_TIMER;
+    getReadyTimerMillis = millis();
+    currentState = GET_READY_TO_PLAY;
   }
 
   if (xPosition > RIGHT_BORDER) {
     ballInCenter();
     lPlayerPoints++;
-    timerMillis = millis();
-    currentState = START_TIMER;
+    getReadyTimerMillis = millis();
+    currentState = GET_READY_TO_PLAY;
   }
   if (rPlayerPoints >= 5) {
      rPlayerPoints = 0;

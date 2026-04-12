@@ -1,16 +1,16 @@
 void renderScreen() {
   display.clearDisplay();
   display.drawLine(
-    borderDistance,
+    paddleBorderDistance,
     yPositionLeftPlayer,
-    borderDistance,
+    paddleBorderDistance,
     yPositionLeftPlayer + paddleLength,
     WHITE
   );
   display.drawLine(
-    RIGHT_BORDER - borderDistance, // calculating the paddles distance to the border
+    RIGHT_BORDER - paddleBorderDistance, // calculating the paddles distance to the border
     yPositionRightPlayer, // +/- paddleRadius takes care of edge clipping
-    RIGHT_BORDER - borderDistance,
+    RIGHT_BORDER - paddleBorderDistance,
     yPositionRightPlayer + paddleLength,
     WHITE
   );

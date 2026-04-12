@@ -1,5 +1,4 @@
-int borderDistance = 5;
-int paddleLength = 18;
+
 int yPositionLeftPlayer = 0;
 int yPositionRightPlayer = 0;
 
@@ -71,7 +70,7 @@ void updatePlayers() {
 // Left Player
 /****************************************
 
-int borderDistance = 5;
+int paddleBorderDistance = 5;
 int paddleRadius = 6;
 int yPositionLeftPlayer = 0;
 int yPositionRightPlayer = 0;
@@ -97,16 +96,16 @@ void updatePlayers() {
                                   LOWER_BORDER - paddleRadius); 
   // mapping the poti values to the Y-Axis Borders of the Screen.
   display.drawLine(
-    borderDistance,
+    paddleBorderDistance,
     yPositionLeftPlayer + paddleRadius,
-    borderDistance,
+    paddleBorderDistance,
     yPositionLeftPlayer - paddleRadius,
     WHITE
   );
   display.drawLine(
-    RIGHT_BORDER - borderDistance, // calculating the paddles distance to the border
+    RIGHT_BORDER - paddleBorderDistance, // calculating the paddles distance to the border
     yPositionRightPlayer + paddleRadius, // +/- paddleRadius takes care of edge clipping
-    RIGHT_BORDER - borderDistance,
+    RIGHT_BORDER - paddleBorderDistance,
     yPositionRightPlayer - paddleRadius,
     WHITE
   );
