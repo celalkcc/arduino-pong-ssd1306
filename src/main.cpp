@@ -55,9 +55,9 @@ static unsigned long getReadyTimerMillis = 0;
 // header Files
 #include "playerManagement.h"
 #include "ballManagement.h"
-#include "rendering.h"
 #include "start.h"
 #include "pointsManagement.h"
+#include "rendering.h"
 /****************************************/
 // Main Program
 /****************************************/
