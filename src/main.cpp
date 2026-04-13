@@ -33,6 +33,9 @@ const int multiButton = 4;
 // defining game Variables
 const int startImageFlipTime = 2000; // intervall to flip between images in start screen
 const int timeToGetReady = 2000; // time players have when game starts and after points were made
+int timeSpentPlayingMillis = 0;
+const int middleLineRenderOffset = 400;
+bool printMiddleLine = 0;
 
 const int winnerScreenTime = 4000;
 
@@ -98,14 +101,20 @@ void loop(){
       break;
 
     case GET_READY_TO_PLAY:
+      printMiddleLine = 0;
       updatePlayers();  // calculates player positions (see playerManagement.h)
       renderScreen();   // renders everything to screen (see rendering.h)
       if(millis() - getReadyTimerMillis > timeToGetReady) {
+        timeSpentPlayingMillis = millis();
         currentState = IN_GAME;
       }
       break;
 
     case IN_GAME:
+      
+      if (millis() - timeSpentPlayingMillis > middleLineRenderOffset) {
+        printMiddleLine = 1;
+      }
       updatePlayers(); // playerPosition (playerManagement.h)
       borderCheck(); // checks if the ball hits something, flips direction (see ballManagement.h)
       ballPosition(); // calculates ball position (ballManagement.h)

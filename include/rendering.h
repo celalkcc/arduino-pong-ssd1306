@@ -1,8 +1,10 @@
 void drawCenterLine() {
-  int centerX = SCREEN_WIDTH / 2;
+  if (printMiddleLine){
+    int centerX = SCREEN_WIDTH / 2;
 
-  for (int y = 0; y < SCREEN_HEIGHT; y += 6) {
-    display.drawLine(centerX, y, centerX, y + 1, WHITE);
+    for (int y = 0; y < SCREEN_HEIGHT; y += 6) {
+      display.drawLine(centerX, y, centerX, y + 1, WHITE);
+    }
   }
 }
 
