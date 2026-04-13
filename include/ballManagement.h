@@ -6,7 +6,9 @@ int yPosition = LOWER_BORDER/2; //initializing ball position in the middle of pl
 int xPosition = RIGHT_BORDER/2;
 
 void ballInCenter() { // initial ball position
-  yPosition = random(LOWER_BORDER);
+  yPosition = random(LOWER_BORDER); // randoamizing the initial ball position to make the game more engaging
+  xDirection = random(1); 
+  yDirection = random(1);
   xPosition = RIGHT_BORDER/2;
 }
 
