@@ -26,9 +26,9 @@ const int LEFT_BORDER = 0;                      // to make it portable to other 
 const int RIGHT_BORDER = (SCREEN_WIDTH - 1);
 
 // defining Poti Pins
-const int potiLeftPlayer = A0;
-const int potiRightPlayer = A1;
-const int multiButton = 4;
+const int potiLeftPlayer = 0;
+const int potiRightPlayer = 1;
+const int multiButton = 5;
 
 // defining game Variables
 const int startImageFlipTime = 2000; // intervall to flip between images in start screen
