@@ -80,7 +80,6 @@ void setup() {
   display.clearDisplay(); 
   millis();
 }
-// asdjkljöaksdlöjasd
 
 void loop(){
   
@@ -90,7 +89,7 @@ void loop(){
       static unsigned long bitmapSwitchMillis = 0;  // time cache for image flipping
       static bool picSelector = 0;                  // determines the pic shown (in start.h)
       if (millis() - bitmapSwitchMillis > startImageFlipTime) {
-        picSelector = !picSelector;
+        picSelector = !picSelector;                 //switches the bitmap pics
         bitmapSwitchMillis = millis();
       }
       printStartScreen(picSelector); // prints a bitmap (see start.h)
