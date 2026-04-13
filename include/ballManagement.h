@@ -7,8 +7,8 @@ int xPosition = RIGHT_BORDER/2;
 
 void ballInCenter() { // initial ball position
   yPosition = random(LOWER_BORDER); // randoamizing the initial ball position to make the game more engaging
-  xDirection = random(1); 
-  yDirection = random(1);
+  xDirection = random(2); 
+  yDirection = random(2);
   xPosition = RIGHT_BORDER/2;
 }
 

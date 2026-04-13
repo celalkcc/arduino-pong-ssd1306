@@ -34,7 +34,7 @@ const int multiButton = 4;
 const int startImageFlipTime = 2000; // intervall to flip between images in start screen
 const int timeToGetReady = 2000; // time players have when game starts and after points were made
 
-//the following variables improve ball visibility while waiting for the game to start
+//the following variables improve ball visibility while waiting for the game to start 
 int timeSpentPlayingMillis = 0;
 const int middleLineRenderOffset = 400; // determines how long the ball rolls before printing the middle line
 bool printMiddleLine = 0;
