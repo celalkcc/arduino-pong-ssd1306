@@ -1,6 +1,6 @@
 /*
 MIT License
-Copyright (c) 2026 Celal
+Copyright (c) 2026 Celal & Luis
 */
 #include <Arduino.h>
 
@@ -25,7 +25,7 @@ const int multiButton = 4;
 
 // Initializing the Display
 #define SCREEN_WIDTH 128 
-#define SCREEN_HEIGHT 32
+#define SCREEN_HEIGHT 64
 
 #define OLED_RESET     -1 
 #define SCREEN_ADDRESS 0x3C 
@@ -53,6 +53,8 @@ const int chaosModeTime = 10000; // time spent in chaosMode()
 
 int paddleBorderDistance = 10;
 int paddleLength = 9;
+
+int ballSpeed = 2000;
 
 // states for the startscreen and all the in-game related states.
 enum machineState {
@@ -128,7 +130,7 @@ void loop(){
         printMiddleLine = 1;
       }
       updatePlayers(); // playerPosition (playerManagement.h)
-      borderCheck(); // checks if the ball hits something, flips direction (see ballManagement.h)
+      borderCheck(); // checks if the ball hits something, flips direction (see ballManagement.h
       ballPosition(); // calculates ball position (ballManagement.h)
       renderScreen(); // renders frames (rendering.h)
       checkPoints(); // detects if a player made a point (pointsManagement.h)
