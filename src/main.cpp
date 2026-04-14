@@ -2,8 +2,20 @@
 MIT License
 Copyright (c) 2026 Celal & Luis
 */
-
 #include <Arduino.h>
+
+#ifdef ESP32 // determines compilation for esp32 or arduino comment for arduino nano
+const int potiMaxValue = 4096;
+const int potiLeftPlayer = 0;
+const int potiRightPlayer = 1;
+const int multiButton = 5;
+#else
+const int potMaxValue = 1024;
+const int potiLeftPlayer = A0;
+const int potiRightPlayer = A1;
+const int multiButton = 4;
+#endif
+
 
 //SSD1306 Libraries
 #include <Adafruit_GFX.h>
@@ -25,10 +37,7 @@ const int LOWER_BORDER = (SCREEN_HEIGHT - 1);   // Using Screenheight and width 
 const int LEFT_BORDER = 0;                      // to make it portable to other displays
 const int RIGHT_BORDER = (SCREEN_WIDTH - 1);
 
-// defining Poti Pins
-const int potiLeftPlayer = 0;
-const int potiRightPlayer = 1;
-const int multiButton = 5;
+
 
 // defining game Variables
 const int startImageFlipTime = 2000; // intervall to flip between images in start screen
