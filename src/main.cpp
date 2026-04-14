@@ -1,6 +1,6 @@
 /*
 MIT License
-Copyright (c) 2026 Celal
+Copyright (c) 2026 Celal & Luis
 */
 
 #include <Arduino.h>
@@ -13,7 +13,7 @@ Copyright (c) 2026 Celal
 
 // Initializing the Display
 #define SCREEN_WIDTH 128 
-#define SCREEN_HEIGHT 32
+#define SCREEN_HEIGHT 64
 
 #define OLED_RESET     -1 
 #define SCREEN_ADDRESS 0x3C 
@@ -117,7 +117,7 @@ void loop(){
         printMiddleLine = 1;
       }
       updatePlayers(); // playerPosition (playerManagement.h)
-      borderCheck(); // checks if the ball hits something, flips direction (see ballManagement.h)
+      borderCheck(); // checks if the ball hits something, flips direction (see ballManagement.h
       ballPosition(); // calculates ball position (ballManagement.h)
       renderScreen(); // renders frames (rendering.h)
       checkPoints(); // detects if a player made a point (pointsManagement.h)
