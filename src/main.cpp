@@ -53,6 +53,8 @@ const int winnerScreenTime = 4000;
 int paddleBorderDistance = 10;
 int paddleLength = 9;
 
+int ballSpeed = 2000;
+
 // states for the startscreen and all the in-game related states.
 enum machineState {
   START_SCREEN,
