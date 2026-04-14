@@ -38,8 +38,9 @@ const int LEFT_BORDER = 0;                      // to make it portable to other 
 const int RIGHT_BORDER = (SCREEN_WIDTH - 1);
 
 
-
-// defining game Variables
+/****************************************/
+// Settings
+/****************************************/
 const int startImageFlipTime = 2000; // intervall to flip between images in start screen
 const int timeToGetReady = 2000; // time players have when game starts and after points were made
 
@@ -134,6 +135,8 @@ void loop(){
       ballPosition(); // calculates ball position (ballManagement.h)
       renderScreen(); // renders frames (rendering.h)
       checkPoints(); // detects if a player made a point (pointsManagement.h)
+      chaosInit();
+      chaosMode();
       break;
 
     case LEFT_WINS:
