@@ -8,7 +8,7 @@ void updatePlayers() {
   yPositionLeftPlayer = map(
                                   potiValueL, 
                                   0, 
-                                  1023, 
+                                  4096, 
                                   UPPER_BORDER, 
                                   LOWER_BORDER - paddleLength); // substracting Paddlelength takes care of paddles edge clipping
   // mapping the poti values to the Y-Axis Borders of the Screen.
@@ -17,7 +17,7 @@ void updatePlayers() {
   yPositionRightPlayer = map(
                                   potiValueR, 
                                   0, 
-                                  1023, 
+                                  4096, 
                                   UPPER_BORDER, // +/- paddleRadius takes care of edge clipping
                                   LOWER_BORDER - paddleLength); 
   // mapping the poti values to the Y-Axis Borders of the Screen.
