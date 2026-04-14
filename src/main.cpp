@@ -49,6 +49,7 @@ const int middleLineRenderOffset = 400; // determines how long the ball rolls be
 bool printMiddleLine = 0;
 
 const int winnerScreenTime = 4000;
+const int chaosModeTime = 10000; // time spent in chaosMode()
 
 int paddleBorderDistance = 10;
 int paddleLength = 9;
@@ -72,6 +73,7 @@ static unsigned long getReadyTimerMillis = 0;
 #include "start.h"
 #include "pointsManagement.h"
 #include "rendering.h"
+#include "chaos.h"
 /****************************************/
 // Main Program
 /****************************************/
